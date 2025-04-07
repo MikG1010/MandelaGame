@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mandela's Journey to Freedom</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #e8f5e9);
+      color: #1a1a1a;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #007847;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    #story {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .choice-btn {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      background-color: #ffb81c; /* Gold */
+      border: none;
+      color: #1a1a1a;
+      padding: 1rem 1.5rem;
+      margin: 1rem auto;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .choice-btn:hover {
+      background: linear-gradient(90deg, #007847, #002395); /* Green to Blue */
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .choice-btn:active {
+      transform: scale(0.98);
+      background-color: #de0034; /* Red tap color */
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .choice-btn {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🇿🇦 Mandela's Journey to Freedom</h1>
+  <div id="story"></div>
+
+  <script>
+    const story = {
+      start: {
+        text: "You are young Nelson Mandela, growing up in Qunu. You help your elders and listen to stories around the fire.",
+        choices: [
+          { text: "Learn about your heritage and customs", next: "university" },
+          { text: "Play and explore the village", next: "village" }
+        ]
+      },
+      village: {
+        text: "You explore nature, but soon realize your passion lies in helping people and understanding justice.",
+        choices: [
+          { text: "Pursue studies in law", next: "university" }
+        ]
+      },
+      university: {
+        text: "You attend the University of Fort Hare but are expelled for protesting student policies.",
+        choices: [
+          { text: "Stand by your principles", next: "jobSearch" },
+          { text: "Apologize and try to return", next: "returnUni" }
+        ]
+      },
+      returnUni: {
+        text: "You attempt to return, but the seed of activism has already been planted.",
+        choices: [
+          { text: "Head to Johannesburg", next: "jobSearch" }
+        ]
+      },
+      jobSearch: {
+        text: "You move to Johannesburg and work as a law clerk, while studying at night.",
+        choices: [
+          { text: "Start forming connections with activists", next: "ancYouth" }
+        ]
+      },
+      ancYouth: {
+        text: "You help form the ANC Youth League and begin organizing resistance against apartheid laws.",
+        choices: [
+          { text: "Launch Defiance Campaign", next: "treasonTrial" },
+          { text: "Focus on legal work", next: "lawPractice" }
+        ]
+      },
+      lawPractice: {
+        text: "You open the first black law firm in South Africa with Oliver Tambo, helping people challenge unjust laws.",
+        choices: [
+          { text: "Continue activism in courts", next: "treasonTrial" }
+        ]
+      },
+      treasonTrial: {
+        text: "You are arrested and tried for treason, but are acquitted after years of legal battle.",
+        choices: [
+          { text: "Go underground", next: "rivoniaTrial" }
+        ]
+      },
+      rivoniaTrial: {
+        text: "You are captured again and tried in the famous Rivonia Trial. You deliver your powerful 'I am prepared to die' speech.",
+        choices: [
+          { text: "Accept life sentence on Robben Island", next: "prisonLife" }
+        ]
+      },
+      prisonLife: {
+        text: "You spend 27 years in prison. You remain a symbol of hope and continue to educate inmates and negotiate behind bars.",
+        choices: [
+          { text: "Negotiate with the government", next: "release" }
+        ]
+      },
+      release: {
+        text: "You are released from prison in 1990. The country celebrates your freedom.",
+        choices: [
+          { text: "Lead ANC into democratic elections", next: "president" }
+        ]
+      },
+      president: {
+        text: "In 1994, you become the first black president of South Africa. A new era of reconciliation begins.",
+        choices: [
+          { text: "Celebrate your legacy", next: "end" }
+        ]
+      },
+      end: {
+        text: "Your journey inspired a nation and the world. Education, justice, and peace were your legacy.",
+        choices: [
+          { text: "Play Again", next: "start" }
+        ]
+      }
+    };
+
+    const storyDiv = document.getElementById("story");
+
+    function showScene(sceneKey) {
+      const scene = story[sceneKey];
+      storyDiv.innerHTML = `<p>${scene.text}</p>`;
+      scene.choices.forEach(choice => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        button.textContent = choice.text;
+        button.onclick = () => showScene(choice.next);
+        storyDiv.appendChild(button);
+      });
+    }
+
+    showScene("start");
+  </script>
+</body>
+</html>
+
